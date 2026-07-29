@@ -67,7 +67,7 @@ const shopSlice = createSlice({
         return;
       }
 
-      const cartData = structuredClone(state.cartItem);
+      const cartData = JSON.parse(JSON.stringify(state.cartItem || {}));
       if (cartData[itemId]) {
         if (cartData[itemId][size]) {
           cartData[itemId][size] += 1;
@@ -87,7 +87,8 @@ const shopSlice = createSlice({
     },
     updateQuantity: (state, action) => {
       const { itemId, size, quantity, token } = action.payload;
-      const cartData = structuredClone(state.cartItem);
+      const cartData = JSON.parse(JSON.stringify(state.cartItem || {}));
+      cartData[itemId] = cartData[itemId] || {};
       cartData[itemId][size] = quantity;
       state.cartItem = cartData;
 
