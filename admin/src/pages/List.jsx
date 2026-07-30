@@ -40,13 +40,13 @@ const List = ({ token }) => {
 
   return (
     <div className='space-y-6'>
-      <div className='rounded-[32px] border border-slate-800/70 bg-slate-900/85 p-6 shadow-2xl shadow-slate-950/20'>
+      <div className='rounded-[32px] p-6 shadow-2xl' style={{ border: '1px solid var(--border)', background: 'var(--nav-bg)' }}>
         <div className='flex flex-col gap-2 md:flex-row md:items-center md:justify-between'>
           <div>
-            <p className='text-sm uppercase tracking-[0.35em] text-amber-300/80'>Product catalog</p>
-            <h2 className='mt-2 text-2xl font-semibold text-white'>All Products</h2>
+            <p className='text-sm uppercase tracking-[0.35em]' style={{ color: 'var(--accent)', opacity: 0.9 }}>Product catalog</p>
+            <h2 className='mt-2 text-2xl font-semibold' style={{ color: 'var(--text)' }}>All Products</h2>
           </div>
-          <p className='text-sm text-slate-400'>{list.length} items available</p>
+          <p className='text-sm' style={{ color: 'var(--muted)' }}>{list.length} items available</p>
         </div>
       </div>
 
@@ -55,18 +55,20 @@ const List = ({ token }) => {
           list.map((item, index) => (
             <div
               key={index}
-              className='grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_0.8fr] items-center gap-4 rounded-[28px] border border-slate-800/60 bg-slate-950/80 p-4 transition duration-300 hover:-translate-y-0.5 hover:border-amber-400/40 hover:bg-slate-900'
+              className='grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_0.8fr] items-center gap-4 rounded-[28px] p-4 transition duration-300'
+              style={{ border: '1px solid var(--border)', background: 'transparent' }}
             >
               <img className='h-20 w-20 rounded-3xl object-cover' src={item.image[0]} alt='' />
               <div className='space-y-1'>
-                <p className='font-semibold text-white'>{item.name}</p>
-                <p className='text-sm text-slate-400'>{item.description?.slice(0, 70) ?? 'No details available'}</p>
+                <p className='font-semibold' style={{ color: 'var(--text)' }}>{item.name}</p>
+                <p className='text-sm' style={{ color: 'var(--muted)' }}>{item.description?.slice(0, 70) ?? 'No details available'}</p>
               </div>
-              <p className='text-sm text-amber-300'>{item.category}</p>
-              <p className='text-sm font-semibold text-white'>{currency}{item.price}</p>
+              <p className='text-sm' style={{ color: 'var(--accent)' }}>{item.category}</p>
+              <p className='text-sm font-semibold' style={{ color: 'var(--text)' }}>{currency}{item.price}</p>
               <button
                 onClick={() => removeProduct(item._id)}
-                className='rounded-full bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 transition duration-300 hover:bg-amber-300'
+                className='rounded-full px-4 py-2 text-sm font-semibold transition duration-300'
+                style={{ background: 'var(--accent)', color: 'var(--button-text)' }}
               >
                 Remove
               </button>

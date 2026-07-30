@@ -14,20 +14,26 @@ export const currency = '$'
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token') ?? '')
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark')
 
   useEffect(() => {
     localStorage.setItem('token', token)
   }, [token])
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
   return (
-    <div className='min-h-screen bg-slate-950 text-slate-100'>
-      <ToastContainer theme='dark' position='top-right' />
+    <div className='app-root'>
+      <ToastContainer theme={theme === 'dark' ? 'dark' : 'light'} position='top-right' />
 
       {token === '' ? (
         <Login setToken={setToken} />
       ) : (
         <div className='min-h-screen'>
-          <Navbar setToken={setToken} />
+          <Navbar setToken={setToken} theme={theme} setTheme={setTheme} />
           <div className='max-w-[1480px] mx-auto px-4 md:px-6'>
             <div className='flex flex-col lg:flex-row gap-6 py-8'>
               <SildeBar />

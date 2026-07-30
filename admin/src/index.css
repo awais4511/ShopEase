@@ -17,3 +17,36 @@ select, input, textarea {
     background-color: #ffebf5;
     border-color: #E2715F;
 }
+
+:root{
+    --bg: #0f172a; /* default dark to match previous look */
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --nav-bg: rgba(15,23,42,0.95);
+    --border: rgba(148,163,184,0.12);
+    --accent: #f59e0b;
+    --button-text: #0f172a;
+}
+
+[data-theme="light"]{
+    --bg: #ffffff;
+    --text: #0f172a;
+    --muted: #475569;
+    --nav-bg: rgba(255,255,255,0.9);
+    --border: #e2e8f0;
+    --accent: #c58645;
+    --button-text: #0f172a;
+}
+
+.app-root{
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Utility classes used by components to respect theme variables */
+.theme-nav-bg{ background: var(--nav-bg); }
+.theme-border{ border-color: var(--border); }
+.theme-muted{ color: var(--muted); }
+.theme-accent-bg{ background: var(--accent); }
+.theme-text{ color: var(--text); }

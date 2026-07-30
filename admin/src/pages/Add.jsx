@@ -71,9 +71,12 @@ const Add = ({ token }) => {
             prev.includes(label) ? prev.filter((item) => item !== label) : [...prev, label]
           )
         }
-        className={`rounded-full px-3 py-1 text-sm transition duration-300 ${
-          active ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-400/20' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
-        }`}
+        style={
+          active
+            ? { borderRadius: 9999, padding: '6px 12px', background: 'var(--accent)', color: 'var(--button-text)', boxShadow: '0 10px 30px -20px rgba(0,0,0,0.6)' }
+            : { borderRadius: 9999, padding: '6px 12px', background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }
+        }
+        className='text-sm transition duration-300'
       >
         {label}
       </button>
@@ -81,16 +84,16 @@ const Add = ({ token }) => {
   }
 
   return (
-    <div className='rounded-[32px] border border-slate-800/80 bg-slate-950/90 p-6 shadow-2xl shadow-slate-950/30'>
+    <div className='rounded-[32px] p-6 shadow-2xl' style={{ border: '1px solid var(--border)', background: 'var(--nav-bg)' }}>
       <div className='mb-8'>
-        <p className='text-sm uppercase tracking-[0.35em] text-amber-300/80'>Product manager</p>
-        <h2 className='mt-3 text-3xl font-semibold text-white'>Add New Item</h2>
-        <p className='mt-2 max-w-2xl text-sm text-slate-400'>Upload product images, select properties, and publish new catalog items in one elegant form.</p>
+        <p className='text-sm uppercase tracking-[0.35em]' style={{ color: 'var(--accent)', opacity: 0.9 }}>Product manager</p>
+        <h2 className='mt-3 text-3xl font-semibold' style={{ color: 'var(--text)' }}>Add New Item</h2>
+        <p className='mt-2 max-w-2xl text-sm' style={{ color: 'var(--muted)' }}>Upload product images, select properties, and publish new catalog items in one elegant form.</p>
       </div>
 
       <form onSubmit={onSubmitHandler} className='space-y-8'>
         <div>
-          <p className='mb-3 text-sm font-semibold text-slate-200'>Upload Images</p>
+          <p className='mb-3 text-sm font-semibold' style={{ color: 'var(--text)' }}>Upload Images</p>
           <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
             {[
               { value: image1, setter: setImage1, id: 'image1' },
@@ -101,7 +104,8 @@ const Add = ({ token }) => {
               <label
                 key={idx}
                 htmlFor={item.id}
-                className='group relative flex h-32 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-3xl border-2 border-dashed border-slate-700 bg-slate-950/70 text-center text-slate-500 transition duration-300 hover:border-amber-400 hover:bg-slate-900'
+                className='group relative flex h-32 cursor-pointer flex-col items-center justify-center overflow-hidden rounded-3xl text-center transition duration-300'
+                style={{ border: '2px dashed var(--border)', background: 'transparent', color: 'var(--muted)' }}
               >
                 {item.value ? (
                   <img
@@ -112,7 +116,7 @@ const Add = ({ token }) => {
                 ) : (
                   <>
                     <img className='mb-3 h-10 w-10 opacity-80' src={assets.upload_area} alt='Upload placeholder' />
-                    <span className='text-sm text-slate-400 transition group-hover:text-amber-300'>Click to upload</span>
+                    <span className='text-sm transition' style={{ color: 'var(--muted)' }}>Click to upload</span>
                   </>
                 )}
                 <input
@@ -128,11 +132,12 @@ const Add = ({ token }) => {
 
         <div className='grid gap-6'>
           <div>
-            <label className='mb-2 block text-sm font-semibold text-slate-200'>Product name</label>
+            <label className='mb-2 block text-sm font-semibold' style={{ color: 'var(--text)' }}>Product name</label>
             <input
               onChange={(e) => setName(e.target.value)}
               value={name}
-              className='w-full rounded-3xl border border-slate-800 bg-slate-950/80 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-amber-400 focus:ring-4 focus:ring-amber-400/10'
+              className='w-full rounded-3xl px-4 py-3 outline-none transition duration-300'
+              style={{ background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }}
               type='text'
               placeholder='Type product name here'
               required
@@ -140,11 +145,12 @@ const Add = ({ token }) => {
           </div>
 
           <div>
-            <label className='mb-2 block text-sm font-semibold text-slate-200'>Product description</label>
+            <label className='mb-2 block text-sm font-semibold' style={{ color: 'var(--text)' }}>Product description</label>
             <textarea
               onChange={(e) => setDescription(e.target.value)}
               value={description}
-              className='min-h-[146px] w-full rounded-3xl border border-slate-800 bg-slate-950/80 px-4 py-4 text-slate-100 outline-none transition duration-300 focus:border-amber-400 focus:ring-4 focus:ring-amber-400/10'
+              className='min-h-[146px] w-full rounded-3xl px-4 py-4 outline-none transition duration-300'
+              style={{ background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }}
               placeholder='Describe the product features and details'
               required
             />
@@ -153,11 +159,12 @@ const Add = ({ token }) => {
 
         <div className='grid gap-6 lg:grid-cols-3'>
           <div>
-            <label className='mb-2 block text-sm font-semibold text-slate-200'>Product category</label>
+            <label className='mb-2 block text-sm font-semibold' style={{ color: 'var(--text)' }}>Product category</label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className='w-full rounded-3xl border border-slate-800 bg-slate-950/80 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-amber-400 focus:ring-4 focus:ring-amber-400/10'
+              className='w-full rounded-3xl px-4 py-3 outline-none transition duration-300'
+              style={{ background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }}
             >
               <option value='Men'>Men</option>
               <option value='Women'>Women</option>
@@ -166,11 +173,12 @@ const Add = ({ token }) => {
           </div>
 
           <div>
-            <label className='mb-2 block text-sm font-semibold text-slate-200'>Sub category</label>
+            <label className='mb-2 block text-sm font-semibold' style={{ color: 'var(--text)' }}>Sub category</label>
             <select
               value={subCategory}
               onChange={(e) => setSubCategory(e.target.value)}
-              className='w-full rounded-3xl border border-slate-800 bg-slate-950/80 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-amber-400 focus:ring-4 focus:ring-amber-400/10'
+              className='w-full rounded-3xl px-4 py-3 outline-none transition duration-300'
+              style={{ background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }}
             >
               <option value='Topwear'>Topwear</option>
               <option value='Bottomwear'>Bottomwear</option>
@@ -179,11 +187,12 @@ const Add = ({ token }) => {
           </div>
 
           <div>
-            <label className='mb-2 block text-sm font-semibold text-slate-200'>Product price</label>
+            <label className='mb-2 block text-sm font-semibold' style={{ color: 'var(--text)' }}>Product price</label>
             <input
               onChange={(e) => setPrice(e.target.value)}
               value={price}
-              className='w-full rounded-3xl border border-slate-800 bg-slate-950/80 px-4 py-3 text-slate-100 outline-none transition duration-300 focus:border-amber-400 focus:ring-4 focus:ring-amber-400/10'
+              className='w-full rounded-3xl px-4 py-3 outline-none transition duration-300'
+              style={{ background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }}
               type='number'
               placeholder='25'
               required
@@ -193,8 +202,8 @@ const Add = ({ token }) => {
 
         <div className='space-y-3'>
           <div className='flex items-center justify-between'>
-            <p className='text-sm font-semibold text-slate-200'>Product Sizes</p>
-            <span className='text-sm text-slate-400'>{sizes.length} selected</span>
+            <p className='text-sm font-semibold' style={{ color: 'var(--text)' }}>Product Sizes</p>
+            <span className='text-sm' style={{ color: 'var(--muted)' }}>{sizes.length} selected</span>
           </div>
           <div className='flex flex-wrap gap-3'>
             {['S', 'M', 'L', 'XL', 'XXL'].map((size) => sizeOption(size))}
@@ -207,16 +216,18 @@ const Add = ({ token }) => {
             checked={bestseller}
             type='checkbox'
             id='bestseller'
-            className='h-4 w-4 rounded accent-amber-400'
+            className='h-4 w-4 rounded'
+            style={{ accentColor: 'var(--accent)' }}
           />
-          <label className='cursor-pointer text-sm text-slate-200' htmlFor='bestseller'>
+          <label className='cursor-pointer text-sm' htmlFor='bestseller' style={{ color: 'var(--text)' }}>
             Add to bestseller
           </label>
         </div>
 
         <button
           type='submit'
-          className='inline-flex items-center justify-center rounded-full bg-amber-400 px-8 py-3 text-base font-semibold text-slate-950 shadow-2xl shadow-amber-400/30 transition duration-300 hover:bg-amber-300 hover:-translate-y-0.5'
+          className='inline-flex items-center justify-center rounded-full px-8 py-3 text-base font-semibold transition duration-300'
+          style={{ background: 'var(--accent)', color: 'var(--button-text)' }}
         >
           Add Product
         </button>
