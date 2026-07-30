@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 const currency = '$';
 const deliveryFee = 10;
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://shopease-i69l.onrender.com';
 
 const initialState = {
   currency,
