@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
@@ -20,6 +20,7 @@ import { fetchProducts, getUserCart } from "./features/shop/shopSlice";
 const App = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.shop.token);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -28,15 +29,21 @@ const App = () => {
     }
   }, [dispatch, token]);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [location.pathname]);
+
+  const showShopSearch = location.pathname === "/shop";
+
   return (
-    <div className="min-h-screen text-slate-800">
+    <div className="min-h-screen bg-transparent text-slate-800 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100">
       <ToastContainer position="top-right" theme="light" />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="sticky top-0 z-40 mt-4 rounded-[2rem] border border-white/70 bg-white/70 px-4 py-3 shadow-[0_10px_40px_-20px_rgba(15,23,42,0.25)] backdrop-blur-xl sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-7">
+        <div className="sticky top-0 z-40 mt-2 rounded-[2rem] border border-white/70 bg-white/70 px-4 py-3 shadow-[0_10px_40px_-20px_rgba(15,23,42,0.25)] backdrop-blur-xl sm:px-6 lg:px-8 dark:border-slate-700/60 dark:bg-slate-900/70">
           <Navbar />
         </div>
-        <SearchBar />
-        <div className="pb-8">
+        {showShopSearch && <SearchBar />}
+        <div className="pb-6 pt-4 sm:pb-8 sm:pt-6">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />

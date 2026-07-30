@@ -14,6 +14,7 @@ const initialState = {
   showSearch: false,
   cartItem: {},
   products: [],
+  loading: false,
   token: localStorage.getItem('token') || '',
 };
 
@@ -102,10 +103,15 @@ const shopSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.loading = false;
         state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
+        state.loading = false;
         toast.error(action.payload || 'Unable to load products');
       })
       .addCase(getUserCart.fulfilled, (state, action) => {

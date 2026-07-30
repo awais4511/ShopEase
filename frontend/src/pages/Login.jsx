@@ -126,7 +126,7 @@ const Login = () => {
                 </p>
               ) : (
                 <p onClick={() => setCurrentState("Login")} className="cursor-pointer transition hover:text-amber-600">
-                  Login here
+                  Sign in
                 </p>
               )}
             </div>

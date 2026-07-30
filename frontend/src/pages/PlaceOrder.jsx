@@ -58,19 +58,17 @@ const onSubmitHandler = async (event) => {
         amount: cartAmount + delivery_fee
       }
 
-            switch (method) {
-
-        // API Calls for COD
-        case 'cod':
-          const response = await axios.post(backendUrl + '/api/order/place',orderData,{headers:{token}})
+      switch (method) {
+        case 'cod': {
+          const response = await axios.post(backendUrl + '/api/order/place', orderData, { headers: { token } });
           if (response.data.success) {
-            dispatch(clearCart())
-            navigate('/orders')
-          }else{
-            toast.error(response.data.message)
+            dispatch(clearCart());
+            navigate('/orders');
+          } else {
+            toast.error(response.data.message);
           }
           break;
-
+        }
         default:
           break;
       }
