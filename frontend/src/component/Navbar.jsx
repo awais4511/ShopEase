@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { assets } from "../assets/assets.js";
@@ -8,6 +8,7 @@ import { ChevronDown, CircleUserRound, LogOut, Menu, MoonStar, PackageOpen, Sear
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef(null);
   const [themeMode, setThemeMode] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("theme") || "light";
@@ -32,6 +33,19 @@ const Navbar = () => {
     document.body.classList.toggle("dark", isDark);
     localStorage.setItem("theme", themeMode);
   }, [themeMode]);
+
+  useEffect(() => {
+    if (!userMenuOpen) return;
+
+    const handleClickOutside = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setUserMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [userMenuOpen]);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -101,7 +115,7 @@ const Navbar = () => {
           </button>
         )}
 
-        <div className="relative">
+        <div ref={userMenuRef} className="relative">
           <button
             type="button"
             onClick={() => {
@@ -117,7 +131,7 @@ const Navbar = () => {
           </button>
 
           {userMenuOpen && (
-            <div className="absolute right-0 top-full z-50 mt-2 w-48 rounded-2xl border border-slate-200 bg-white p-2 text-sm text-slate-600 shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">
+            <div className="absolute right-0 top-full z-50 mt-2 w-35 rounded-2xl border border-slate-200 bg-white p-2 text-sm text-slate-600 shadow-xl dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">
               {token ? (
                 <>
                   <button type="button" className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-left transition hover:bg-amber-50 hover:text-amber-600 dark:hover:bg-slate-800 dark:hover:text-amber-400">
