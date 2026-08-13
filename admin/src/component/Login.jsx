@@ -35,66 +35,53 @@ const Login = ({ setToken }) => {
   }
 
   return (
-    <div className='min-h-screen flex flex-col md:flex-row'>
-
-      {/* LEFT SIDE - Login Form */}
-      <div className='w-full md:w-1/2 flex items-center justify-center p-6'>
-        <div className='w-full max-w-md'>
-
-          {/* Logo / Brand */}
-          <div className='flex items-center justify-center gap-3 mb-10'>
-            <div style={{ borderRadius: 12, padding: 12, background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.12)' }}>
-              <ShoppingBag size={28} style={{ color: 'var(--accent)' }} />
-            </div>
-            <div>
-              <p className='text-xs uppercase tracking-[0.35em]' style={{ color: 'var(--accent)' }}>Premium admin</p>
-              <h1 className='text-3xl font-extrabold' style={{ color: 'var(--text)' }}>ShopEase</h1>
-            </div>
+    <div className='min-h-screen px-4 py-10 sm:px-6 lg:px-8'>
+      <div className='mx-auto flex w-full max-w-5xl flex-col overflow-hidden rounded-[2rem] border border-slate-200 bg-white/90 shadow-[0_20px_60px_-20px_rgba(15,23,42,0.2)] backdrop-blur-xl dark:border-slate-700 dark:bg-slate-950/90 lg:grid lg:grid-cols-[0.95fr_1.05fr]'>
+        <div className='flex flex-col justify-center gap-8 p-8 lg:p-10'>
+          <div>
+            <p className='text-sm uppercase tracking-[0.35em] text-amber-600'>Admin access</p>
+            <h1 className='mt-2 text-4xl font-black text-slate-900 dark:text-white'>Welcome back</h1>
+            <p className='mt-3 max-w-md text-sm leading-7 text-slate-500 dark:text-slate-400'>Sign in to manage products, approve orders, and keep your admin dashboard aligned with the ShopEase mobile-inspired design.</p>
           </div>
 
-          <div className='rounded-[32px] p-8' style={{ border: '1px solid var(--border)', background: 'var(--nav-bg)', boxShadow: '0 40px 100px -50px rgba(0,0,0,0.6)' }}>
-            <h2 className='text-2xl font-semibold mb-2' style={{ color: 'var(--text)' }}>Welcome back</h2>
-            <p className='text-sm mb-8' style={{ color: 'var(--muted)' }}>Sign in to access the admin dashboard</p>
+          <div className='rounded-[2rem] border border-slate-200 bg-slate-50/90 p-6 dark:border-slate-700 dark:bg-slate-950/80'>
+            <div className='mb-6'>
+              <p className='text-sm uppercase tracking-[0.35em] text-amber-600'>ShopEase Admin</p>
+              <h2 className='mt-2 text-3xl font-semibold text-slate-900 dark:text-white'>Login to your dashboard</h2>
+            </div>
 
             <form onSubmit={handleSubmit} className='space-y-5'>
               <div>
-                <label className='block text-sm font-medium mb-2' style={{ color: 'var(--muted)' }}>
-                  Email Address
-                </label>
+                <label className='mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300'>Email</label>
                 <div className='relative'>
-                  <Mail className='absolute left-4 top-1/2 -translate-y-1/2' size={18} style={{ color: 'var(--muted)' }} />
+                  <Mail className='absolute left-4 top-1/2 -translate-y-1/2 text-slate-400' size={18} />
                   <input
                     type='email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder='your@email.com'
-                    className='w-full rounded-3xl py-3 pl-12 pr-4 outline-none transition'
-                    style={{ background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }}
+                    className='w-full rounded-[1rem] border border-slate-200 bg-white px-4 py-3 pl-12 text-sm text-slate-900 outline-none transition focus:border-amber-400 focus:ring-amber-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100'
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <label className='block text-sm font-medium mb-2' style={{ color: 'var(--muted)' }}>
-                  Password
-                </label>
+                <label className='mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300'>Password</label>
                 <div className='relative'>
-                  <Lock className='absolute left-4 top-1/2 -translate-y-1/2' size={18} style={{ color: 'var(--muted)' }} />
+                  <Lock className='absolute left-4 top-1/2 -translate-y-1/2 text-slate-400' size={18} />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder='Enter your password'
-                    className='w-full rounded-3xl py-3 pl-12 pr-12 outline-none transition'
-                    style={{ background: 'transparent', color: 'var(--text)', border: '1px solid var(--border)' }}
+                    className='w-full rounded-[1rem] border border-slate-200 bg-white px-4 py-3 pl-12 pr-12 text-sm text-slate-900 outline-none transition focus:border-amber-400 focus:ring-amber-200 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100'
                     required
                   />
                   <button
                     type='button'
                     onClick={() => setShowPassword(!showPassword)}
-                    className='absolute right-4 top-1/2 -translate-y-1/2 transition'
-                    style={{ color: 'var(--muted)' }}
+                    className='absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-slate-500 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100'
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -104,48 +91,31 @@ const Login = ({ setToken }) => {
               <button
                 type='submit'
                 disabled={loading}
-                className='w-full rounded-3xl px-6 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60 flex items-center justify-center gap-3'
-                style={{ background: 'var(--accent)', color: 'var(--button-text)' }}
+                className='button-primary w-full'
               >
-                {loading ? (
-                  <>
-                    <span className='h-4 w-4 animate-spin rounded-full border-2 border-slate-950/25 border-t-slate-950'></span>
-                    Signing in...
-                  </>
-                ) : (
-                  'Login'
-                )}
+                {loading ? 'Signing in...' : 'Login'}
               </button>
             </form>
           </div>
 
-          <p className='text-center text-xs mt-6' style={{ color: 'var(--muted)' }}>
-            © {new Date().getFullYear()} ShopEase Admin. All rights reserved.
-          </p>
+          <p className='text-center text-sm text-slate-500 dark:text-slate-400'>© {new Date().getFullYear()} ShopEase Admin. All rights reserved.</p>
         </div>
-      </div>
 
-      <div className='hidden md:flex w-1/2 items-center justify-center relative overflow-hidden rounded-[48px] p-10' style={{ border: '1px solid var(--border)' }}>
-        <img
-          src={loginBg}
-          alt='Admin dashboard'
-          className='absolute inset-0 h-full w-full object-cover opacity-90'
-        />
-        <div className='absolute inset-0' style={{ background: 'var(--nav-bg)', opacity: 0.75 }}></div>
-        <div className='relative z-10 text-center max-w-md'>
-          <h1 className='text-5xl font-extrabold tracking-tight mb-4' style={{ color: 'var(--text)' }}>SHOPEASE</h1>
-          <p className='text-base leading-8' style={{ color: 'var(--muted)' }}>Manage products, orders & customers with a bold admin experience built for speed and clarity.</p>
-          <div className='mt-10 rounded-[32px] p-6 text-left text-sm' style={{ border: '1px solid rgba(245,158,11,0.08)', background: 'rgba(255,255,255,0.02)', color: 'var(--muted)' }}>
-            <p className='mb-3 font-semibold' style={{ color: 'var(--accent)' }}>Admin quick tips</p>
-            <ul className='space-y-2'>
-              <li>• Fast access to orders and products</li>
-              <li>• Elegant dashboard layout</li>
-              <li>• Designed for modern admin workflows</li>
-            </ul>
+        <div className='hidden lg:flex items-center justify-center rounded-[2rem] bg-gradient-to-br from-amber-100 via-white to-orange-100 p-10'>
+          <div className='w-full max-w-md space-y-6'>
+            <h2 className='text-3xl font-black text-slate-900 dark:text-white'>Admin tools built to feel like mobile.</h2>
+            <p className='text-sm leading-7 text-slate-600 dark:text-slate-300'>Keep order approval, catalog control, and admin status updates fast and intuitive with a modern mobile-style interface.</p>
+            <div className='rounded-[1.75rem] border border-white/60 bg-white/90 p-6 shadow-sm'>
+              <p className='text-sm font-semibold text-amber-700'>Admin quick tips</p>
+              <ul className='mt-3 space-y-2 text-sm text-slate-600'>
+                <li>• Review pending orders in one tap</li>
+                <li>• Keep product data clean and updated</li>
+                <li>• Use a layout that scales nicely on phones</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
   )
 }
