@@ -9,7 +9,7 @@ import Orders from './pages/Orders'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-export const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://shopease-i69l.onrender.com'
+export const backendUrl = import.meta.env.VITE_BACKEND_URL || 'https://shopease-v8zt.onrender.com'
 export const currency = '$'
 
 const App = () => {
